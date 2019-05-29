@@ -13,6 +13,12 @@ describe('contact services', () => {
     it('get the default letter for a special character', () => {
       expect(contactService.getFirstLetter('↓azdazdþ', '+')).toEqual('+');
     });
+
+    it('get the ascii letter for a special letter', () => {
+      expect(contactService.getFirstLetter('Éazdazdþ', '+')).toEqual('e');
+      expect(contactService.getFirstLetter('àazdazdþ', '+')).toEqual('a');
+      expect(contactService.getFirstLetter('ñazdazdþ', '+')).toEqual('n');
+    });
   });
 
   describe('formatName', () => {

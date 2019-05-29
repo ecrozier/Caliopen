@@ -1,3 +1,5 @@
+import diacritics from 'diacritics';
+
 // initialize a contact, usefull for redux-form to prevent recursiv delete of initial values if a
 // propoerty is undefined
 export const getNewContact = () => ({
@@ -31,10 +33,10 @@ export function formatName({ contact, format }) {
 export function getFirstLetter(string, defaultLetter) {
   let firstLetter = defaultLetter;
   if (string) {
-    firstLetter = string.substr(0, 1).toLowerCase();
+    firstLetter = diacritics.remove(string.substr(0, 1).toLowerCase());
   }
 
-  if ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZeéèEÉÈàÀâÂâÄîÎïÏçÇùûôÔöÖ'.indexOf(firstLetter) === -1) {
+  if (!/^[a-z]$/.test(firstLetter)) {
     firstLetter = defaultLetter;
   }
 
